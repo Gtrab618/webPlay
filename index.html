@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Próximamente</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: linear-gradient(135deg, #3b82f6, #6366f1);
+      font-family: 'Arial', sans-serif;
+      color: #ffffff;
+      text-align: center;
+    }
+    .container {
+      max-width: 600px;
+      padding: 20px;
+      border-radius: 15px;
+      background-color: rgba(0, 0, 0, 0.5);
+    }
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 20px;
+    }
+    p {
+      font-size: 1.2rem;
+      margin-bottom: 30px;
+    }
+    .countdown {
+      font-size: 2rem;
+      font-weight: bold;
+    }
+    .footer {
+      margin-top: 30px;
+      font-size: 0.9rem;
+      opacity: 0.8;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>¡Próximamente!</h1>
+    <p>Estamos trabajando en algo increíble. ¡No te lo pierdas!</p>
+    <div class="countdown">
+      <span id="days">00</span>d : 
+      <span id="hours">00</span>h : 
+      <span id="minutes">00</span>m : 
+      <span id="seconds">00</span>s
+    </div>
+    <div class="footer">Gracias por tu paciencia</div>
+  </div>
+
+  <script>
+    // Configuración de la fecha objetivo
+    const targetDate = new Date("2024-12-31T23:59:59").getTime();
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const timeLeft = targetDate - now;
+
+      if (timeLeft > 0) {
+        const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+        document.getElementById("days").textContent = days.toString().padStart(2, '0');
+        document.getElementById("hours").textContent = hours.toString().padStart(2, '0');
+        document.getElementById("minutes").textContent = minutes.toString().padStart(2, '0');
+        document.getElementById("seconds").textContent = seconds.toString().padStart(2, '0');
+      } else {
+        document.querySelector(".countdown").textContent = "¡Llegó el momento!";
+      }
+    }
+
+    // Actualizar el contador cada segundo
+    setInterval(updateCountdown, 1000);
+    updateCountdown(); // Llamada inicial para mostrar valores de inmediato
+  </script>
+</body>
+</html>
